@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Biodata Diri</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            color: #3f4642;
+            background-color: #f4f7f3;
+            line-height: 1.6;
+        }
+
+        /* =========================
+        DARK MODE
+        ========================= */
+
+        body.dark-mode {
+            background-color: #1e2522;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode header {
+            background-color: #30453e;
+        }
+
+        body.dark-mode nav {
+            background-color: #26332f;
+        }
+
+        body.dark-mode nav a {
+            color: #f1f1f1;
+        }
+
+        body.dark-mode nav a:hover {
+            color: #a8c9bb;
+        }
+
+        body.dark-mode section {
+            background-color: #2a3430;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode table {
+            background-color: #2a3430;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode th {
+            background-color: #3d554c;
+            color: white;
+        }
+
+        body.dark-mode td {
+            border-color: #53635d;
+        }
+
+        body.dark-mode footer {
+            background-color: #26332f;
+            color: #f1f1f1;
+        }
+
+        body.dark-mode .nav-links {
+            background-color: #252b28;
+        }
+
+        body.dark-mode .nav-links a {
+            color: #9fc5b4;
+        }
+
+        body.dark-mode .nav-links a:hover {
+            background-color: #343c37;
+        }
+        /* ==============================
+         ANIMASI BUTTON
+        ============================== */
+
+        button {
+            cursor: pointer;
+            transition: transform 0.2s ease,
+                        box-shadow 0.2s ease,
+                        background-color 0.3s ease;
+        }
+
+        button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+        }
+
+        button:active {
+            transform: scale(0.92);
+        }
+
+
+        /* ==============================
+        HAMBURGER MENU
+        ============================== */
+
+        #menuButton {
+            display: block;
+            border: none;
+            background-color: #7a9b8e;
+            color: white;
+            font-size: 22px;
+            padding: 7px 14px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: transform 0.2s ease,
+                        box-shadow 0.2s ease,
+                        background-color 0.3s ease;
+        }
+
+        #menuButton:hover {
+            transform: scale(1.05);
+        }
+
+        #menuButton:active {
+            transform: scale(0.90);
+        }
+
+
+        /* ==============================
+        MENU NAVIGASI
+        ============================== */
+
+        .nav-links {
+            display: none;
+            position: absolute;
+            top: 60px;
+            left: 20px;
+            flex-direction: column;
+            background-color: #eef3ef;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+            min-width: 170px;
+            text-align: left;
+        }
+
+        .nav-links.active {
+            display: flex;
+            animation: menuMuncul 0.3s ease;
+        }
+
+        .nav-links a {
+            color: #7a9b8e;
+            text-decoration: none;
+            margin: 0;
+            padding: 8px 12px;
+            font-weight: bold;
+            border-radius: 5px;
+            transition: background-color 0.2s ease,
+                        transform 0.2s ease;
+        }
+
+        .nav-links a:hover {
+            background-color: #dce7e0;
+            transform: translateX(5px);
+            text-decoration: none;
+        }
+
+
+        /* ==============================
+        DARK MODE BUTTON DI KANAN
+        ============================== */
+
+        #themeButton {
+            margin-left: auto;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 15px;
+            background-color: #7a9b8e;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+        /* ==============================
+        ANIMASI MENU
+        ============================== */
+
+        @keyframes menuMuncul {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+
+            #menuButton {
+                display: block;
+            }
+
+            .nav-links {
+                display: none;
+                width: 100%;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links.active {
+                display: flex;
+                animation: menuMuncul 0.3s ease;
+            }
+
+            #themeButton {
+                margin-top: 5px;
+            }
+
+        /* ===== HEADER ===== */
+        header {
+            background-color: #7a9b8e;
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        header p {
+            margin: 5px 0 0;
+        }
+
+        /* ===== NAVIGASI ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background-color: #eef3ef;
+            padding: 12px 20px;
+            display: flex;
+            align-items: center;
+            border-bottom: 1px solid #ddd;
+        }
+
+        /* ===== KONTEN ===== */
+        main {
+            max-width: 900px;
+            margin: 25px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background-color: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        .judul-bagian {
+            color: #7a9b8e;
+            border-bottom: 2px solid #7a9b8e;
+            padding-bottom: 5px;
+        }
+
+        /* ===== PROFIL ===== */
+        .profil {
+            text-align: center;
+        }
+
+        .profil img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 50%;
+            border: 4px solid #7a9b8e;
+        }
+
+        .profil h2 {
+            margin-bottom: 5px;
+            color: #7a9b8e;
+        }
+
+        /* ===== BLOCKQUOTE ===== */
+        blockquote {
+            border-left: 5px solid #7a9b8e;
+            margin: 20px 0;
+            padding: 12px 20px;
+            background-color: #f8f5f1;
+            font-style: italic;
+            color: #555c58;
+        }
+
+        blockquote cite {
+            display: block;
+            margin-top: 8px;
+            font-style: normal;
+            font-weight: bold;
+            color: #7a9b8e;
+        }
+
+        /* ===== TABEL BIODATA ===== */
+        .tabel-biodata {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .tabel-biodata td {
+            padding: 10px;
+            border-bottom: 1px solid #dfe6e1;
+        }
+
+        .tabel-biodata td:first-child {
+            width: 30%;
+            font-weight: bold;
+            color: #7a9b8e;
+        }
+
+        /* ===== PENDIDIKAN & HOBI ===== */
+        .kotak-info {
+            background-color: #f8f5f1;
+            padding: 15px;
+            border-left: 4px solid #7a9b8e;
+            margin-bottom: 10px;
+        }
+
+        
+        /* ===== GALERI ===== */
+        .galeri {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 18px;
+        }
+
+        figure {
+            margin: 0;
+            text-align: center;
+            width: 100%;
+        }
+
+        figure img {
+            display: block;
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            object-fit: cover;
+            border-radius: 8px;
+            border: 3px solid #7a9b8e;
+        }
+
+        figcaption {
+            font-size: 14px;
+            color: #777d79;
+            margin-top: 7px;
+        }
+
+        /* ===== KONTAK ===== */
+        .kontak a {
+            color: #7a9b8e;
+            text-decoration: none;
+        }
+
+        .kontak a:hover {
+            text-decoration: underline;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: #7a9b8e;
+            color: white;
+            text-align: center;
+            padding: 18px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 600px) {
+            .galeri {
+                grid-template-columns: 1fr;
+            }
+
+            figure img {
+                aspect-ratio: 16 / 10;
+            }
+
+            main {
+                padding: 0 12px;
+            }
+
+            section {
+                padding: 18px;
+            }
+
+            .tabel-biodata td:first-child {
+                width: 40%;
+            }
+        }
+
+        /* ===== PERBAIKAN DARK MODE ===== */
+        body.dark-mode .tabel-biodata td {
+            border-bottom-color: #46534e;
+        }
+
+        body.dark-mode blockquote {
+            background-color: #252d29;
+            color: #d8dfdc;
+        }
+
+        body.dark-mode blockquote cite {
+            color: #a8c9bb;
+        }
+
+        body.dark-mode .kotak-info {
+            background-color: #252d29;
+            color: #e8eeeb;
+        }
+
+        body.dark-mode figcaption {
+            color: #b8c2bd;
+        }
+
+        body.dark-mode .kontak a {
+            color: #9fc5b4;
+        }
+
+        body.dark-mode .nav-links {
+            background-color: #252d29;
+            border: 1px solid #46534e;
+        }
+
+        body.dark-mode #menuButton,
+        body.dark-mode #themeButton {
+            background-color: #5f8173;
+            color: #ffffff;
+        }
+
+        body.dark-mode nav {
+            border-bottom-color: #46534e;
+        }
+
+        body.dark-mode .judul-bagian {
+            color: #9fc5b4;
+            border-bottom-color: #5f8173;
+        }
+
+        body.dark-mode .profil img,
+        body.dark-mode figure img {
+            border-color: #5f8173;
+        }
+
+        body.dark-mode section {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header>
+        <h1>BIODATA DIRI</h1>
+        <p>Website Biodata Pribadi</p>
+    </header>
+
+    <!-- ================= NAVIGASI ================= -->
+    <nav>
+        <button id="menuButton" type="button">☰</button>
+
+        <div class="nav-links">
+            <a href="#profil">Profil</a>
+            <a href="#biodata">Biodata</a>
+            <a href="#pendidikan">Pendidikan</a>
+            <a href="#hobi">Hobi</a>
+            <a href="#galeri">Galeri</a>
+            <a href="#kontak">Kontak</a>
+        </div>
+
+        <button id="themeButton" type="button">🌙 Dark Mode</button>
+    </nav>
+
+    <main>
+
+        <!-- ================= PROFIL ================= -->
+        <section id="profil" class="profil">
+            <img src="profile.jpeg" alt="Foto Profil">
+
+            <h2>Deslo Aldo Anggoro</h2>
+
+            <p>
+                Saya adalah seorang Mahasiswa yang senang belajar hal-hal baru dan mengeksplorasi dunia di sekitar saya.
+            </p>
+
+            <blockquote>
+                "Jangan takut untuk mencoba sesuatu yang baru, karena setiap pengalaman adalah bagian dari proses belajar."
+                <cite>— Deslo Aldo Anggoro</cite>
+            </blockquote>
+        </section>
+
+        <!-- ================= BIODATA ================= -->
+        <section id="biodata">
+            <h2 class="judul-bagian">Biodata</h2>
+
+            <table class="tabel-biodata">
+                <tr>
+                    <td>Nama Lengkap</td>
+                    <td>Deslo Aldo Anggoro</td>
+                </tr>
+
+                <tr>
+                    <td>Nama Panggilan</td>
+                    <td>Deslo</td>
+                </tr>
+
+                <tr>
+                    <td>Tempat, Tanggal Lahir</td>
+                    <td>Ketapang, 1 Desember 2006</td>
+                </tr>
+
+                <tr>
+                    <td>Jenis Kelamin</td>
+                    <td>Laki-laki</td>
+                </tr>
+
+                <tr>
+                    <td>Alamat</td>
+                    <td>Ketapang, Kalimantan Barat</td>
+                </tr>
+
+                <tr>
+                    <td>Agama</td>
+                    <td>Islam</td>
+                </tr>
+
+                <tr>
+                    <td>Status</td>
+                    <td>Mahasiswa</td>
+                </tr>
+            </table>
+        </section>
+
+        <!-- ================= PENDIDIKAN ================= -->
+        <section id="pendidikan">
+            <h2 class="judul-bagian">Riwayat Pendidikan</h2>
+
+            <div class="kotak-info">
+                <b>2022 - 2025</b><br>
+                SMA NEGERI 1 KETAPANG
+            </div>
+
+            <div class="kotak-info">
+                <b>2019 - 2022</b><br>
+                SMP NEGERI 1 KETAPANG
+            </div>
+
+            <div class="kotak-info">
+                <b>2013 - 2019</b><br>
+                SD NEGERI 09 KETAPANG
+            </div>
+        </section>
+
+        <!-- ================= HOBI ================= -->
+        <section id="hobi">
+            <h2 class="judul-bagian">Hobi dan Minat</h2>
+
+            <ul>
+                <li>Bermain Game</li>
+                <li>Membaca Buku</li>
+                <li>Mendengarkan Musik</li>
+                <li>Minat saya yaitu pada Programming</li>
+            </ul>
+        </section>
+
+        <!-- ================= GALERI ================= -->
+        <section id="galeri">
+            <h2 class="judul-bagian">Galeri</h2>
+
+            <div class="galeri">
+                <figure>
+                    <img src="gambar1.jpeg" alt="Foto Galeri 1">
+                    <figcaption>Foto 1 - Foto saat saya berlibur</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="gambar2.jpeg" alt="Foto Galeri 2">
+                    <figcaption>Foto 2 - Foto saat saya berlibur</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="gambar3.jpeg" alt="Foto Galeri 3">
+                    <figcaption>Foto 3 - Foto saat saya berlibur</figcaption>
+                </figure>
+
+                <figure>
+                    <img src="gambar4.jpeg" alt="Foto Galeri 4">
+                    <figcaption>Foto 4 - Foto saat saya berlibur</figcaption>
+                </figure>
+
+                </div>
+        </section>
+
+        <!-- ================= KONTAK ================= -->
+        <section id="kontak" class="kontak">
+            <h2 class="judul-bagian">Kontak</h2>
+
+            <p><b>Email:</b> h1101251036@student.untan.ac.id</p>
+            <p><b>No. HP:</b> 089633999997</p>
+            <p><b>Instagram:</b> <a href="https://www.instagram.com/desloal">@Desloal</a></p>
+            <p><b>GitHub:</b> <a href="https://github.com/DesloAl">DesloAl</a></p>
+        </section>
+
+    </main>
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+        <p>&copy; 2026 Deslo Aldo Anggoro. Biodata Pribadi.</p>
+    </footer>
+<script src="script.js"></script>
+</body>
+</html>
